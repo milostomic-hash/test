@@ -1,0 +1,3 @@
+Mobile interface supporting document upload, batch processing, review UI for human verification of low-confidence extractions, and analytics dashboards for supervisors. Displays source snippets and extraction justifications with confidence scores.
+Users upload de-identified medical reports through the mobile interface. 
+Cloud-based software system accessible via mobile interface for document upload and web-based review UI for human verification workflows. Processed results can be exported in multiple formats, including Excel (XLSX), CSV, JSON, and PDF, allowing seamless integration with a variety of downstream workflows and tools.
