@@ -1,0 +1,36 @@
+model_architecture.yamlAI model definition (architecture + input schema) for the system connected to the monitor.Place this file in the ROOT (or /models) of the GitHub repo that is attached to the AI system,on the branch the repo is connected to. .yaml is a monitored/whitelisted extension.HOW TO PRODUCE A "HIGH" (MAJOR) SYNC EVENT:1) Add this file, connect/sync the repo once (first sync = clone = MINOR, no AI analysis).2) Then CHANGE one of the blocks below and run "Sync now" (that pull runs the AI diff analysis):- edit model.algorithm / model.framework  -> ALGORITHM_SELECTION_CHANGED  (MAJOR)- edit architecture.layers (add/remove/resize layers) -> MODEL_ARCHITECTURE_CHANGED (MAJOR)- edit input_schema.features (add/remove/retype a feature) -> INPUT_SCHEMA_CHANGED (MAJOR)The resulting sync event shows severity = "High" in System Logs and sets hasMajor on the repo.model:
+name: credit-risk-scorer
+version: 1.0.0Changing algorithm/framework => ALGORITHM_SELECTION_CHANGED (MAJOR)algorithm: xgboost
+framework: scikit-learn
+task: binary_classificationCore model structure (layers / design). Editing this => MODEL_ARCHITECTURE_CHANGED (MAJOR)architecture:
+type: gradient_boosted_trees
+layers:
+- name: input
+units: 32
+- name: dense_1
+units: 64
+activation: relu
+- name: dense_2
+units: 32
+activation: relu
+- name: output
+units: 1
+activation: sigmoidStructure/type of input data (features, format). Editing this => INPUT_SCHEMA_CHANGED (MAJOR)input_schema:
+format: tabular
+features:
+- name: age
+type: integer
+- name: annual_income
+type: float
+- name: employment_years
+type: float
+- name: credit_utilization
+type: float
+- name: num_open_accounts
+type: integer
+validation:
+required: [age, annual_income, credit_utilization]Training setup (editing this is only MODERATE: TRAINING_CONFIGURATION_UPDATED)training:
+epochs: 100
+batch_size: 256
+optimizer: adam
+learning_rate: 0.01
