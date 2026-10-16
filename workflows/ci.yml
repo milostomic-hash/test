@@ -19,16 +19,3 @@ jobs:
       - name: Build
         run: echo "build step"
 
-  # ▼▼▼ DELETE THIS ENTIRE "validate" JOB IN THE SECOND COMMIT TO TRIGGER MAJOR ▼▼▼
-  validate:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run unit tests
-        run: pytest -q
-      - name: Model input validation tests
-        run: pytest tests/validation -q
-      - name: Data quality / schema validation
-        run: python scripts/validate_input_schema.py
-  # ▲▲▲ DELETE UP TO HERE ▲▲▲
